@@ -22,6 +22,8 @@ function App() {
 
   useEffect(() => {
     // [NEW] Supabase Auth Listener
+    if (!supabase) return;
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setIsLoggedIn(!!session);
@@ -36,6 +38,37 @@ function App() {
 
     return () => subscription.unsubscribe();
   }, []);
+
+  if (!supabase) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-slate-950 text-white p-4">
+        <div className="max-w-md w-full bg-slate-900 border border-red-500/30 rounded-2xl p-8 shadow-2xl text-center space-y-6 relative overflow-hidden">
+          <div className="absolute inset-0 bg-red-500/5 pointer-events-none"></div>
+          <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto border border-red-500/30">
+            <Shield size={32} className="text-red-500" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-black text-white mb-2">System Failure</h1>
+            <p className="text-slate-400">
+              Supabase configuration is missing. The application cannot initialize the neural link.
+            </p>
+          </div>
+          <div className="bg-slate-950 p-4 rounded-xl border border-slate-800 text-left space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <AlertCircle size={12} /> Diagnostic Code: ENV_MISSING
+            </div>
+            <p className="text-xs text-slate-300 font-mono break-all">
+              VITE_SUPABASE_URL<br />
+              VITE_SUPABASE_ANON_KEY
+            </p>
+          </div>
+          <div className="text-xs text-slate-500">
+            Please verify Vercel Project Settings &gt; Environment Variables.
+          </div>
+        </div>
+      </div>
+    );
+  }
 
 
   const [messages, setMessages] = useState([
