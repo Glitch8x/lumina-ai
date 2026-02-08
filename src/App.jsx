@@ -6,7 +6,7 @@ import Groq from 'groq-sdk';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-import { Send, Bot, User, Sparkles, Menu, Shield, Globe, Code, Cpu, TrendingUp, Paperclip, Activity, BookOpen, LayoutDashboard, Settings, Trash2 } from 'lucide-react';
+import { Send, Bot, User, Sparkles, Menu, Shield, Globe, Code, Cpu, TrendingUp, Paperclip, Activity, BookOpen, LayoutDashboard, Settings, Trash2, AlertCircle } from 'lucide-react';
 import { LUMINA_SYSTEM_PROMPT } from './constants';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
